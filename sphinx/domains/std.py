@@ -630,6 +630,11 @@ class StandardDomain(Domain):
             anonlabels[name] = docname, labelid
             if node.tagname in ('section', 'rubric'):
                 sectname = clean_astext(node[0])  # node[0] == title node
+            elif node.tagname in ('topic'):
+                if len(node.get('names')) >= 2:
+                    sectname = node['names'][0]
+                else:
+                    continue
             elif self.is_enumerable_node(node):
                 sectname = self.get_numfig_title(node)
                 if not sectname:
